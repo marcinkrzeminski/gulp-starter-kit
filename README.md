@@ -43,4 +43,4 @@ In order to build the production version of your project run __gulp build__ from
 - del
 - run-sequence
 
-Thanks to all the plugins creators.
+Big thanks to all the authors of these packages :heart:
