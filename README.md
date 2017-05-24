@@ -32,7 +32,7 @@ In order to build the production version of your project run __gulp build__ from
 - browser-sync
 - gulp-sass
 - gulp-sourcemaps
-- gulp-auroprefixer
+- gulp-autoprefixer
 - gulp-clean-css
 - gulp-uglify
 - gulp-concat
