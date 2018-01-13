@@ -22,8 +22,6 @@
     "gulp-html-replace": "^1.6.1",
     "gulp-htmlmin": "^3.0.0",
     "gulp-imagemin": "^3.0.3",
-    "gulp-sass": "^2.3.2",
-    "gulp-sourcemaps": "^2.1.1",
     "gulp-uglify": "^2.0.0",
     "run-sequence": "^1.2.2"
   }
