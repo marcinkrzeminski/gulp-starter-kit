@@ -3,6 +3,7 @@
 
 # Dependency directories
 node_modules
+dist
 
 ### macOS ###
 *.DS_Store
