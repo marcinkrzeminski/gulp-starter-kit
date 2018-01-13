@@ -1,4 +1,6 @@
-# gulp-starter-kit
+# gulp-starter-kit Sassless version
+
+This version doesn't support Sass. Please use master branch for Sass version support.
 
 If you want to know how to build that kind of startet kit you can watch the YouTube videos I created while working on this starter kit: https://goo.gl/sMFmyN (Note: Videos are in Polish).
 
@@ -24,7 +26,7 @@ npm install
 gulp
 ```
 
-## Build 
+## Build
 
 In order to build the production version of your project run __gulp build__ from the root of cloned repo.
 
@@ -32,8 +34,6 @@ In order to build the production version of your project run __gulp build__ from
 
 - gulp
 - browser-sync
-- gulp-sass
-- gulp-sourcemaps
 - gulp-autoprefixer
 - gulp-clean-css
 - gulp-uglify
