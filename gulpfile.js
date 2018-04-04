@@ -8,7 +8,7 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var imagemin = require('gulp-imagemin');
 var changed = require('gulp-changed');
-var htmlReaplce = require('gulp-html-replace');
+var htmlReplace = require('gulp-html-replace');
 var htmlMin = require('gulp-htmlmin');
 var del = require('del');
 var sequence = require('run-sequence');
@@ -80,7 +80,7 @@ gulp.task('img', function() {
 
 gulp.task('html', function() {
   return gulp.src(config.htmlin)
-    .pipe(htmlReaplce({
+    .pipe(htmlReplace({
       'css': config.cssreplaceout,
       'js': config.jsreplaceout
     }))
