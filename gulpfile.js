@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const browserSync = require('browser-sync');
 const sass = require('gulp-sass');
-const sourcemaps = require('gulp-sourcemaps');
+const sourceaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
@@ -17,23 +17,24 @@ const babel = require('gulp-babel');
 const config = {
 	dist: 'dist/',
 	src: 'src/',
-	cssin: 'src/css/**/*.css',
-	jsin: 'src/js/**/*.js',
-	es6in: 'src/es6/**/*.js',
-	jsin: 'src/js/**/*.js',
-	imgin: 'src/img/**/*.{jpg,jpeg,png,gif}',
-	htmlin: 'src/*.html',
-	scssin: 'src/scss/**/*.scss',
-	cssout: 'dist/css/',
-	jsout: 'dist/js/',
-	es6out: 'dist/es6/',
-	imgout: 'dist/img/',
-	htmlout: 'dist/',
-	scssout: 'src/css/',
-	cssoutname: 'style.css',
-	jsoutname: 'script.js',
-	cssreplaceout: 'css/style.css',
-	jsreplaceout: 'js/script.js'
+	cssIn: 'src/css/**/*.css',
+	jsIn: 'src/js/**/*.js',
+	imgIn: 'src/img/**/*.{jpg,jpeg,png,gif}',
+	htmlIn: 'src/*.html',
+	scssIn: 'src/scss/**/*.scss',
+	
+	jsWorker: 'src/jsWorker/',
+	jsWorkerFiles: 'src/jsWorker/**/*.js',
+	
+	cssOut: 'dist/css/',
+	jsOut: 'dist/js/',
+	imgOut: 'dist/img/',
+	htmlOut: 'dist/',
+	scssOut: 'src/css/',
+	cssOutName: 'style.css',
+	jsOutName: 'script.js',
+	cssReplaceOut: 'css/style.css',
+	jsReplaceOut: 'js/script.js'
 };
 
 gulp.task('reload', () => {
@@ -45,56 +46,56 @@ gulp.task('serve', ['sass'], () => {
 		server: config.src
 	});
 
-	gulp.watch([config.htmlin, config.jsin], ['reload']);
-	gulp.watch(config.scssin, ['sass']);
+	gulp.watch([config.htmlIn, config.jsIn], ['reload']);
+	gulp.watch(config.scssIn, ['sass']);
 });
 
 gulp.task('sass', () => {
-	return gulp.src(config.scssin)
+	return gulp.src(config.scssIn)
 		.pipe(sourcemaps.init())
 		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer({
 			browsers: ['last 3 versions']
 		}))
 		.pipe(sourcemaps.write())
-		.pipe(gulp.dest(config.scssout))
+		.pipe(gulp.dest(config.scssOut))
 		.pipe(browserSync.stream());
 });
 
 gulp.task('css', () => {
-	return gulp.src(config.cssin)
-		.pipe(concat(config.cssoutname))
+	return gulp.src(config.cssIn)
+		.pipe(concat(config.cssOutName))
 		.pipe(cleanCSS())
-		.pipe(gulp.dest(config.cssout));
+		.pipe(gulp.dest(config.cssOut));
 });
 
 gulp.task('babel', () => {
-	gulp.src(config.es6in)
+	return gulp.src(config.jsIn)
 		.pipe(babel({
 			presets: ['es2015']
 		}))
-		.pipe(gulp.dest(config.es6out))
+		.pipe(gulp.dest(config.jsWorker))
 });
 
 gulp.task('js', () => {
-	return gulp.src(config.jsin)
-		.pipe(concat(config.jsoutname))
+	return gulp.src(config.jsWorkerFiles)
+		.pipe(concat(config.jsOutName))
 		.pipe(uglify())
-		.pipe(gulp.dest(config.jsout));
+		.pipe(gulp.dest(config.jsOut));
 });
 
 gulp.task('img', () => {
-	return gulp.src(config.imgin)
-		.pipe(changed(config.imgout))
+	return gulp.src(config.imgIn)
+		.pipe(changed(config.imgOut))
 		.pipe(imagemin())
-		.pipe(gulp.dest(config.imgout));
+		.pipe(gulp.dest(config.imgOut));
 });
 
 gulp.task('html', () => {
-	return gulp.src(config.htmlin)
+	return gulp.src(config.htmlIn)
 		.pipe(htmlReplace({
-			'css': config.cssreplaceout,
-			'js': config.jsreplaceout
+			'css': config.cssReplaceOut,
+			'js': config.jsReplaceOut
 		}))
 		.pipe(htmlMin({
 			sortAttributes: true,
@@ -105,11 +106,11 @@ gulp.task('html', () => {
 });
 
 gulp.task('clean', () => {
-	return del([config.dist]);
+	return del([config.dist,config.jsWorker]);
 });
 
 gulp.task('build', () => {
-	sequence('clean', ['html', 'babel', 'js', 'css', 'img']);
+	sequence('clean', 'html', 'babel', ['js', 'css', 'img']);
 });
 
 gulp.task('default', ['serve']);
