@@ -1,12 +1,12 @@
 const gulp = require('gulp');
 const browserSync = require('browser-sync');
 const sass = require('gulp-sass');
-const sourceaps = require('gulp-sourcemaps');
+const sourceMaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
-const imagemin = require('gulp-imagemin');
+const imageMin = require('gulp-imagemin');
 const changed = require('gulp-changed');
 const htmlReplace = require('gulp-html-replace');
 const htmlMin = require('gulp-htmlmin');
@@ -52,12 +52,12 @@ gulp.task('serve', ['sass'], () => {
 
 gulp.task('sass', () => {
 	return gulp.src(config.scssIn)
-		.pipe(sourcemaps.init())
+		.pipe(sourceMaps.init())
 		.pipe(sass().on('error', sass.logError))
 		.pipe(autoprefixer({
 			browsers: ['last 3 versions']
 		}))
-		.pipe(sourcemaps.write())
+		.pipe(sourceMaps.write())
 		.pipe(gulp.dest(config.scssOut))
 		.pipe(browserSync.stream());
 });
@@ -87,7 +87,7 @@ gulp.task('js', () => {
 gulp.task('img', () => {
 	return gulp.src(config.imgIn)
 		.pipe(changed(config.imgOut))
-		.pipe(imagemin())
+		.pipe(imageMin())
 		.pipe(gulp.dest(config.imgOut));
 });
 
