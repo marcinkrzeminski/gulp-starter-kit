@@ -42,6 +42,7 @@ In order to build the production version of your project run __gulp build__ from
 - gulp-changed
 - gulp-html-replace
 - gulp-htlmin
+- gulp-babel
 - del
 - run-sequence
 
