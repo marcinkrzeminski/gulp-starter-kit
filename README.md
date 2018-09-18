@@ -28,7 +28,7 @@ gulp
 
 In order to build the production version of your project run __gulp build__ from the root of cloned repo.
 
-## List of npm packaged used
+## List of npm packages used
 
 - gulp
 - browser-sync
